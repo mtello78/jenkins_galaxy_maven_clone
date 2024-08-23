@@ -100,6 +100,16 @@
 		</repository>
        </repositories>
        <distributionManagement>
+	        <repository>
+		  <id>manueltello2026</id>
+		  <url>https://pkgs.dev.azure.com/manueltello2026/_packaging/manueltello2026/maven/v1</url>
+		  <releases>
+		    <enabled>true</enabled>
+		  </releases>
+		  <snapshots>
+		    <enabled>true</enabled>
+		  </snapshots>
+		</repository>
        </distributionManagement>
 		
 
