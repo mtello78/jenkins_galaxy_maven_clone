@@ -1,7 +1,5 @@
-
 trigger:
 - main
-
 
 pool:
   vmImage: ubuntu-latest
@@ -13,6 +11,10 @@ stages:
   - job: job01
     displayName: Compilando
     steps:
+    - task: MavenAuthenticate@0
+      inputs:
+        artifactsFeeds: 'devsecops08092024'
+      displayName: Autenticando Artifacts
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
@@ -25,6 +27,18 @@ stages:
         effectivePomSkip: false
         sonarQubeRunAnalysis: false
       displayName: Contruyendo Artefacto
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml'
+        goals: 'deploy'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
+      displayName: Publicando Artefacto en Artifacts
     - task: CopyFiles@2
       inputs:
         Contents: 'target/*.jar'
