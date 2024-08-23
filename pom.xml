@@ -86,6 +86,22 @@
 		</dependency-->
 
 	</dependencies>
+         
+       <repositories>
+	 <repository>
+	   <id>devsecops08092024</id>
+             <url>https://pkgs.dev.azure.com/devsecops08092024/_packaging/devsecops08092024/maven/v1</url>
+             <releases>
+               <enabled>true </enabled>
+             </releases>
+             <snapshots>
+               <enabled>true </enabled>
+             </snapshots>
+	 </repository>
+       </repositories>
+       <distributionManagement>
+       </distributionManagement>
+		
 
 	<build>
 		<plugins>
