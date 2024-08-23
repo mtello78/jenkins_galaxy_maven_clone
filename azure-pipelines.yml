@@ -13,7 +13,7 @@ stages:
     steps:
     - task: MavenAuthenticate@0
       inputs:
-        artifactsFeeds: 'devsecops08092024'
+        artifactsFeeds: 'manueltello2026'
       displayName: Autenticando Artifacts
     - task: Maven@4
       inputs:
