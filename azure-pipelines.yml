@@ -15,6 +15,23 @@ stages:
       inputs:
         artifactsFeeds: 'manueltello2026'
       displayName: Autenticando Artifacts
+    - task: SonarQubePrepare@6
+      inputs:
+        SonarQube: 'sc_sonarqube_prd'
+        scannerMode: 'CLI'
+        configMode: 'manual'
+        cliProjectKey: 'labmaven02'
+        cliProjectName: 'labmaven02'
+        cliSources: '.'
+      displayName: Preparar Configuracion de Sonar 
+    - task: SonarQubeAnalyze@6
+      inputs:
+        jdkversion: 'JAVA_HOME_17_X64'
+      displayName: Analizando Codigo
+    - task: SonarQubePublish@6
+      inputs:
+        pollingTimeoutSec: '300'
+      displayName: Publicando Resultado  
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
