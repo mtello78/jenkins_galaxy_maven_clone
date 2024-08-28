@@ -11,6 +11,8 @@ stages:
   - job: job01
     displayName: Compilando
     steps:
+    - checkout: self
+      fetchDepth: 0
   #  - task: MavenAuthenticate@0
   #    inputs:
   #      artifactsFeeds: 'manueltello2026'
@@ -58,6 +60,7 @@ stages:
       inputs:
         jdkversion: 'JAVA_HOME_17_X64'
       displayName: Analizando Codigo
+      
   #  - task: SonarQubePublish@6
   #    inputs:
   #      pollingTimeoutSec: '300'
