@@ -11,10 +11,10 @@ stages:
   - job: job01
     displayName: Compilando
     steps:
-    - task: MavenAuthenticate@0
-      inputs:
-        artifactsFeeds: 'manueltello2026'
-      displayName: Autenticando Artifacts    
+  #  - task: MavenAuthenticate@0
+  #    inputs:
+  #      artifactsFeeds: 'manueltello2026'
+  #    displayName: Autenticando Artifacts    
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
