@@ -14,24 +14,7 @@ stages:
     - task: MavenAuthenticate@0
       inputs:
         artifactsFeeds: 'manueltello2026'
-      displayName: Autenticando Artifacts
-    - task: SonarQubePrepare@6
-      inputs:
-        SonarQube: 'sc_sonarqube_prd'
-        scannerMode: 'CLI'
-        configMode: 'manual'
-        cliProjectKey: 'labmaven02'
-        cliProjectName: 'labmaven02'
-        cliSources: '.'
-      displayName: Preparar Configuracion de Sonar 
-    - task: SonarQubeAnalyze@6
-      inputs:
-        jdkversion: 'JAVA_HOME_17_X64'
-      displayName: Analizando Codigo
-    - task: SonarQubePublish@6
-      inputs:
-        pollingTimeoutSec: '300'
-      displayName: Publicando Resultado  
+      displayName: Autenticando Artifacts    
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
@@ -43,7 +26,42 @@ stages:
         mavenAuthenticateFeed: false
         effectivePomSkip: false
         sonarQubeRunAnalysis: false
-      displayName: Contruyendo Artefacto
+      displayName: Contruyendo Artefacto  
+    - task: SonarQubePrepare@6
+      inputs:
+        SonarQube: 'sc_sonarqube_prd'
+        scannerMode: 'CLI'
+        configMode: 'manual'
+        cliProjectKey: 'labmaven02'
+        cliProjectName: 'labmaven02'
+        extraProperties: |
+          sonar.exclusions=**/*.bin
+          sonar.projectKey=labmaven02
+          sonar.projectName=labmaven02
+          sonar.sources=src/main
+          sonar.sourceEncoding=UTF-8
+          sonar.language=java
+          sonar.tests=src/test
+          sonar.junit.reportsPath=target/surefire-reports
+          sonar.surefire.reportsPath=target/surefire-reports
+          sonar.jacoco.reportPath=target/jacoco.exec
+          sonar.java.binaries=target/classes
+          sonar.java.coveragePlugin=jacoco
+          sonar.coverage.jacoco.xmlReportPaths=target/jacoco.xml
+          sonar.exclusions=**/*IT.java,**/*TEST.java,**/*Test.java,**/src/it**,**/src/test**,**/gradle/wrapper**
+          sonar.java.libraries=target/*.jar
+    - powershell: |
+        $params = "$env:SONARQUBE_SCANNER_PARAMS" -replace '"sonar.branch.name":"[\w,/,-]*"\,?'
+        Write-Host "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$
+      displayName: Preparar Configuracion de Sonar 
+    - task: SonarQubeAnalyze@6
+      inputs:
+        jdkversion: 'JAVA_HOME_17_X64'
+      displayName: Analizando Codigo
+    - task: SonarQubePublish@6
+      inputs:
+        pollingTimeoutSec: '300'
+      displayName: Publicando Resultado  
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
