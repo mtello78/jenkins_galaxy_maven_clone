@@ -56,7 +56,7 @@ stages:
       displayName: Preparar Configuracion de Sonar 
     - task: SonarQubeAnalyze@6
       inputs:
-        jdkversion: 'JAVA_HOME_17_X64'
+        jdkversion: 'JAVA_HOME'
       displayName: Analizando Codigo
     - task: SonarQubePublish@6
       inputs:
