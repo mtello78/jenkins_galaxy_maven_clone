@@ -56,32 +56,32 @@ stages:
       displayName: Preparar Configuracion de Sonar 
     - task: SonarQubeAnalyze@6
       inputs:
-        jdkversion: 'JAVA_HOME'
+        jdkversion: 'JAVA_HOME_17_X64'
       displayName: Analizando Codigo
-    - task: SonarQubePublish@6
-      inputs:
-        pollingTimeoutSec: '300'
-      displayName: Publicando Resultado  
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml'
-        goals: 'deploy'
-        publishJUnitResults: true
-        testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        javaHomeOption: 'JDKVersion'
-        mavenVersionOption: 'Default'
-        mavenAuthenticateFeed: false
-        effectivePomSkip: false
-        sonarQubeRunAnalysis: false
-      displayName: Publicando Artefacto en Artifacts
-    - task: CopyFiles@2
-      inputs:
-        Contents: 'target/*.jar'
-        TargetFolder: '$(build.artifactstagingdirectory)'
-      displayName: Copiando Artefacto
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'artifact'
-        publishLocation: 'Container'
-      displayName: Publicando Artefacto
+  #  - task: SonarQubePublish@6
+  #    inputs:
+  #      pollingTimeoutSec: '300'
+  #    displayName: Publicando Resultado  
+  #  - task: Maven@4
+  #    inputs:
+  #      mavenPomFile: 'pom.xml'
+  #      goals: 'deploy'
+  #      publishJUnitResults: true
+  #      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+  #      javaHomeOption: 'JDKVersion'
+  #      mavenVersionOption: 'Default'
+  #      mavenAuthenticateFeed: false
+  #      effectivePomSkip: false
+  #      sonarQubeRunAnalysis: false
+  #    displayName: Publicando Artefacto en Artifacts
+  #  - task: CopyFiles@2
+  #    inputs:
+  #      Contents: 'target/*.jar'
+  #      TargetFolder: '$(build.artifactstagingdirectory)'
+  #    displayName: Copiando Artefacto
+  #  - task: PublishBuildArtifacts@1
+  #    inputs:
+  #      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+  #      ArtifactName: 'artifact'
+  #      publishLocation: 'Container'
+  #    displayName: Publicando Artefacto
