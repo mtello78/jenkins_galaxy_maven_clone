@@ -61,10 +61,10 @@ stages:
         jdkversion: 'JAVA_HOME_17_X64'
       displayName: Analizando Codigo
       
-  #  - task: SonarQubePublish@6
-  #    inputs:
-  #      pollingTimeoutSec: '300'
-  #    displayName: Publicando Resultado  
+    - task: SonarQubePublish@6
+      inputs:
+        pollingTimeoutSec: '300'
+      displayName: Publicando Resultado  
   #  - task: Maven@4
   #    inputs:
   #      mavenPomFile: 'pom.xml'
