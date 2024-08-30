@@ -33,6 +33,7 @@ stages:
       inputs:
         serviceConnectionEndpoint: 'sc_snyk_sca'
         testType: 'code'
+        monitorWhen: 'always'
         codeSeverityThreshold: 'medium'
         failOnIssues: false
         projectName: '$(Build.Repository.Name)'
