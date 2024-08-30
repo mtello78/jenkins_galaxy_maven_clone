@@ -28,7 +28,15 @@ stages:
         mavenAuthenticateFeed: false
         effectivePomSkip: false
         sonarQubeRunAnalysis: false
-      displayName: Contruyendo Artefacto  
+      displayName: Contruyendo Artefacto
+    - task: SnykSecurityScan@1
+      inputs:
+        serviceConnectionEndpoint: 'sc_snyk_sca'
+        testType: 'code'
+        codeSeverityThreshold: 'medium'
+        failOnIssues: false
+        projectName: '$(Build.Repository.Name)'
+        organization: 'manueltello2026'    
     - task: SonarQubePrepare@6
       inputs:
         SonarQube: 'sc_sonarqube_prd'
