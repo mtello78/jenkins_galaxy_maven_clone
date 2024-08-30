@@ -37,6 +37,7 @@ stages:
         failOnIssues: false
         projectName: '$(Build.Repository.Name)'
         organization: 'manueltello2026'
+    
     - task: SnykSecurityScan@1
       inputs:
         serviceConnectionEndpoint: 'sc_snyk_sca'
