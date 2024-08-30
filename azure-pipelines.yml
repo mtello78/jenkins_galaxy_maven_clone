@@ -11,8 +11,8 @@ stages:
   - job: job01
     displayName: Compilando
     steps:
-    - checkout: self
-      fetchDepth: 0
+  #  - checkout: self
+  #    fetchDepth: 0
   #  - task: MavenAuthenticate@0
   #    inputs:
   #      artifactsFeeds: 'manueltello2026'
