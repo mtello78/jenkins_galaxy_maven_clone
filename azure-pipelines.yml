@@ -71,8 +71,7 @@ stages:
           sonar.java.libraries=target/*.jar
     - powershell: |
         $params = "$env:SONARQUBE_SCANNER_PARAMS" -replace '"sonar.branch.name":"[\w,/,-]*"\,?'
-        Write-Host "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$
-      displayName: Preparar Configuracion de Sonar 
+        Write-Host "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$params" 
     - task: SonarQubeAnalyze@6
       inputs:
         jdkversion: 'JAVA_HOME_17_X64'
